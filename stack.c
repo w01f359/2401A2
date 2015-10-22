@@ -29,22 +29,31 @@ void st_dump(StackType *stk)
 void st_push(StackType *stk, char *fname, int numP, int* paramArr)
 {
   int addAt = stk->numFrames;
+  int i;
   FrameType frame;
   strcpy(frame.funcName, fname);
   frame.numParams = numP;
-  frame.params[0] = paramArr[0];
-  frame.params[1] = paramArr[1];
+
+  for(i = 0; i < numP; i++)
+    frame.params[i] = paramArr[i];
 
   stk->frames[addAt] = frame;
   stk->numFrames++;
+
+  st_dump(stk);
 
 
 }
 
 void st_pop(StackType *stk, int numP, int* paramArr)
 {
-
+  
+  int i;
+  for(i = 0; i < numP; i++)
+    stk->frames[stk->numFrames-1].params[i] = paramArr[i];
 
   st_dump(stk);
+  if(stk->numFrames > 0)
+    stk->numFrames--;
 }
 

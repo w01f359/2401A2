@@ -15,7 +15,6 @@ void sumIterative(int numElements, int *intArray, int *sum, StackType *stk)
 
   st_push(stk, "sumIterative", 2, temp);
 
-  temp[0] = 0;
   temp[1] = *sum;
 
   st_pop(stk, 2, temp);
@@ -26,12 +25,25 @@ void sumIterative(int numElements, int *intArray, int *sum, StackType *stk)
 
 void sumRecursive(int numElements, int *intArray, int *sum, StackType *stk)
 {
+
+  int temp[2];
+  int i;
+  temp[0] = numElements;
+  temp[1] = *sum;
+
   if (numElements == 0) {
     *sum = 0;
+    st_push(stk, "sumRecursive", 2, temp);
+    st_pop(stk, 2, temp);
     return;
   }
 
+  st_push(stk, "sumRecursive", 2, temp);
+
   sumRecursive(numElements-1, intArray, sum, stk);
   *sum += intArray[numElements-1];
+  temp[0] = numElements;
+  temp[1] = *sum;
+  st_pop(stk, 2, temp);
 }
 
