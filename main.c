@@ -11,7 +11,7 @@ int main()
   int choice, rc;
   StackType stack;
 
-  st_init(&stack);
+  st_init(&stack); //initialize the stack
 
   rc = getArrayData(intArray, &numElm);
   if (rc < 0)
